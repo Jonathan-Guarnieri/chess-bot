@@ -1,5 +1,6 @@
 services:
   web:
+    build: .
     image: chess-bot
     working_dir: /app
     volumes:
