@@ -1,0 +1,7 @@
+services:
+  web:
+    image: chess-bot
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: bundle exec rails s --using=thruster
