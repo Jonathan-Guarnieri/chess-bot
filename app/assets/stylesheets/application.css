@@ -8,3 +8,27 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+body {
+  background: grey;
+  width: 100vw;
+  height: 100vh;
+}
+
+.board {
+  display: flex;
+  border: 10px solid black;
+}
+
+.square {
+  width: 80px;
+  height: 80px;
+}
+
+.dark-square {
+  background-color: green;
+}
+
+.light-square {
+  background-color: rgb(201, 229, 201);
+}
