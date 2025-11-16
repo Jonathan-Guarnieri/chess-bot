@@ -43,6 +43,9 @@ gem "image_processing", "~> 1.2"
 # A framework for building reusable, testable & encapsulated view components in Ruby on Rails.
 gem 'view_component', '~> 4.1', '>= 4.1.1'
 
+# A fast chess library that use bitboards to play chess with Ruby
+gem 'chess', '~> 0.4.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
