@@ -1,12 +1,10 @@
-
-<div class='board'>
-  <% %w(a b c d e f g h).each_with_index do |col, col_index| %>
-    <div class='col'>
-      <% (1..8).to_a.reverse.each do |row| %>
-        <div id=<%= "#{col}#{row}" %> class="square <%= (col_index + row).odd? ? "dark-square" : "light-square" %>">
-          <%= "#{col}#{row}" %>
-        </div>
-      <% end %>
-    </div>
+<div class="board">
+  <% (1..8).to_a.reverse.each do |row| %>
+    <% %w(a b c d e f g h).each_with_index do |col, col_index| %>
+      <div id="<%= "#{col}#{row}" %>" class="square <%= (col_index + row).odd? ? "dark-square" : "light-square" %>">
+        <%= "#{col}#{row}" %>
+        <%= render PieceComponent.new %>
+      </div>
+    <% end %>
   <% end %>
 </div>
