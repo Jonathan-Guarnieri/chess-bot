@@ -1,7 +1,7 @@
-<%= turbo_stream.replace "#{@from}-piece" do %>
+<%= turbo_stream.update "#{@from}-piece" do %>
   <%= render PieceComponent.new(nil) %>
 <% end %>
 
-<%= turbo_stream.replace "#{@to}-piece" do %>
+<%= turbo_stream.update "#{@to}-piece" do %>
   <%= render PieceComponent.new(@piece) %>
 <% end %>
