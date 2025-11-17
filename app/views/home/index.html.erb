@@ -1,5 +1,5 @@
 <div class="board" data-controller="home">
-  <% (1..8).to_a.each do |row| %>
+  <% (1..8).to_a.reverse.to_a.each do |row| %>
     <% %w(a b c d e f g h).each_with_index do |col, col_index| %>
       <% square_name = "#{col}#{row}" %>
       <% square_color = (col_index + row).odd? ? "dark-square" : "light-square" %>
