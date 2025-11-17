@@ -1,7 +1,9 @@
 class HomeController < ApplicationController
   def index
     fen = session[:game_fen].present? ? session[:game_fen] : Chess::Game.new.board.to_fen
-    @board = Chess::Game.load_fen(fen).board
+    game = Chess::Game.load_fen(fen)
+    @board = game.board
+    @active_player = game.active_player
   end
 
   def move
@@ -14,6 +16,7 @@ class HomeController < ApplicationController
     game.move(move)
 
     @piece = game.board[@to]
+    @active_player = game.active_player
 
     session[:game_fen] = game.board.to_fen
 

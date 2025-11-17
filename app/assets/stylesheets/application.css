@@ -10,14 +10,22 @@
  */
 
 body {
-  background: grey;
+  margin:0;
+  background:grey;
+}
+
+#home {
+  display:flex;
+  flex-direction:row;
+  align-items: center;
 }
 
 .board {
   display: grid;
   grid-template-columns: repeat(8, 80px);
   grid-template-rows: repeat(8, 80px);
-  border: 10px solid black;
+  border: 2px solid black;
+  margin: 10px;
 }
 
 .square {
@@ -44,4 +52,24 @@ body {
 .piece img {
   width: 100%;
   height: 100%;
+}
+
+#active-player-component {
+  display: flex;
+  height: fit-content;
+  align-items: center;
+  padding: 20px;
+  padding-left: 50px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 570;
+  font-size: 1.1em;
+}
+
+#active-player {
+  width: 30px;
+  height: 30px;
+  border: 1.8px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: red; /* Keep it red to detect when the active player isn’t being set correctly */
 }

@@ -5,3 +5,7 @@
 <%= turbo_stream.update "#{@to}-piece" do %>
   <%= render PieceComponent.new(@piece) %>
 <% end %>
+
+<%= turbo_stream.replace 'active-player' do %>
+  <div id="active-player" style="background-color: <%= @active_player %>"></div>
+<% end %>
