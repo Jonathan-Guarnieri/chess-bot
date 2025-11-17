@@ -9,10 +9,11 @@ class HomeController < ApplicationController
     game = Chess::Game.load_fen(old_fen)
     @from = params[:from]
     @to = params[:to]
-    @piece = game.board[@from]
 
     move = "#{@from}#{@to}"
     game.move(move)
+
+    @piece = game.board[@to]
 
     session[:game_fen] = game.board.to_fen
 
