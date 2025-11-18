@@ -7,6 +7,10 @@ class PieceComponent < ViewComponent::Base
     @piece.present?
   end
 
+  def color
+    @piece.start_with?('w') ? 'white' : 'black'
+  end
+
   private
 
   def piece_asset_name_for(fen_piece)

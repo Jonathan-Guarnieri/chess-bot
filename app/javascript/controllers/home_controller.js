@@ -22,7 +22,19 @@ export default class extends Controller {
     this.from = null
 
     const prev = document.getElementById(from)
-    if (prev) prev.classList.remove("selected-square")
+    prev.classList.remove("selected-square")
+    const sameColorPieces =
+      document.querySelector(`#${from} .white-piece`) &&
+      document.querySelector(`#${to} .white-piece`) ||
+      document.querySelector(`#${from} .black-piece`) &&
+      document.querySelector(`#${to} .black-piece`)
+
+    if (sameColorPieces) {
+      this.from = to
+      const next = document.getElementById(to)
+      next.classList.add("selected-square")
+      return
+    }
 
     fetch("/moves", {
       method: "POST",
