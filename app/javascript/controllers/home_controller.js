@@ -1,3 +1,4 @@
+// extrair esse arquivo para uma controller de board, nao de home
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -8,34 +9,51 @@ export default class extends Controller {
   click(event) {
     const el = event.currentTarget
 
+    // Handle the first click:
     if (!this.from) {
-      const elHasPiece = !!el.querySelector(".piece")
-      if (elHasPiece) {
-        this.from = el.id
-        el.classList.add("selected-square")
-      }
+      const isPiece = !!el.querySelector(".piece")
+      if (isPiece) this._setFrom(el.id)
       return
     }
 
+    // Handle the second click:
     const from = this.from
     const to = el.id
-    this.from = null
 
-    const prev = document.getElementById(from)
-    prev.classList.remove("selected-square")
-    const sameColorPieces =
+    this._deselect(from)
+
+    if (this._sameColorPieces(from, to)) {
+      this._setFrom(to)
+      return
+    }
+
+    this.from = null
+    this._postMove(from, to)
+  }
+
+  _setFrom(from) {
+    this.from = from
+    this._select(from)
+  }
+
+  _select(elementId) {
+    document.getElementById(elementId).classList.add("selected-square")
+  }
+
+  _deselect(elementId) {
+    document.getElementById(elementId).classList.remove("selected-square")
+  }
+
+  _sameColorPieces(from, to) {
+    return (
       document.querySelector(`#${from} .white-piece`) &&
       document.querySelector(`#${to} .white-piece`) ||
       document.querySelector(`#${from} .black-piece`) &&
       document.querySelector(`#${to} .black-piece`)
+    )
+  }
 
-    if (sameColorPieces) {
-      this.from = to
-      const next = document.getElementById(to)
-      next.classList.add("selected-square")
-      return
-    }
-
+  _postMove(from, to) {
     fetch("/moves", {
       method: "POST",
       headers: {
