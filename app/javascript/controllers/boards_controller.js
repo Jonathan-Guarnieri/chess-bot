@@ -1,4 +1,3 @@
-// extrair esse arquivo para uma controller de board, nao de home
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
