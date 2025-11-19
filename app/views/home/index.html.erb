@@ -1,0 +1,15 @@
+<div id='home'>
+  <%= render BoardComponent.new(@board) %>
+
+  <div id='active-player-component'>
+    <p>Player's turn:</p>
+    <div id="active-player" style="background-color: <%= @active_player %>"></div>
+  </div>
+</div>
+
+CONTINUAR DAQUI:
+1) ADICIONA HIGHLITH PRA ULTIMA PEÇA MOVIDA
+2) FAZER O BOT JOGAR SOZINHO
+3) CONSERTAR BUG -> AO FAZER ROQUE, TORRE NÃO É AUTOMATICAMENTE ATUALIZADA PARA A NOVA POSICAO NA VIEW
+4) ADICIONAR TRATAMENTO DE EVENTOS PARA TODAS AS POSSÍVEIS SITUACOES (COMO EMPATES, VITORIAS, ETC.)
+5) AJUSTAR LÓGICA DE TODOS OS SONS

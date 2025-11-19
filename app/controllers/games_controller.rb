@@ -1,11 +1,4 @@
-class BoardsController < ApplicationController
-  def index
-    fen = session[:game_fen].present? ? session[:game_fen] : Chess::Game.new.board.to_fen
-    game = Chess::Game.load_fen(fen)
-    @board = game.board
-    @active_player = game.active_player
-  end
-
+class GamesController < ApplicationController
   def move
     old_fen = session[:game_fen] || Chess::Game.new.board.to_fen
     game = Chess::Game.load_fen(old_fen)
