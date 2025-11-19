@@ -9,3 +9,5 @@
 <%= turbo_stream.replace 'active-player' do %>
   <div id="active-player" style="background-color: <%= @active_player %>"></div>
 <% end %>
+
+<%= render "sound", sound_name: @sound_name %>

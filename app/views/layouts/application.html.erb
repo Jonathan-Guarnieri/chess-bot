@@ -24,6 +24,20 @@
   </head>
 
   <body>
+    <audio id="sound-capture" src="<%= asset_path("capture.mp3") %>"></audio>
+    <audio id="sound-castle" src="<%= asset_path("castle.mp3") %>"></audio>
+    <audio id="sound-drawoffer" src="<%= asset_path("drawoffer.mp3") %>"></audio>
+    <audio id="sound-game-end" src="<%= asset_path("game-end.mp3") %>"></audio>
+    <audio id="sound-game-start" src="<%= asset_path("game-start.mp3") %>"></audio>
+    <audio id="sound-illegal" src="<%= asset_path("illegal.mp3") %>"></audio>
+    <audio id="sound-move-check" src="<%= asset_path("move-check.mp3") %>"></audio>
+    <audio id="sound-move-opponent" src="<%= asset_path("move-opponent.mp3") %>"></audio>
+    <audio id="sound-move-self" src="<%= asset_path("move-self.mp3") %>"></audio>
+    <audio id="sound-notification" src="<%= asset_path("notification.mp3") %>"></audio>
+    <audio id="sound-promote" src="<%= asset_path("promote.mp3") %>"></audio>
+    <audio id="sound-tenseconds" src="<%= asset_path("tenseconds.mp3") %>"></audio>
+
+    <div id="sound_events"></div>
     <%= yield %>
   </body>
 </html>
