@@ -11,5 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
-  post "/moves", to: "games#move"
+  post "/player_move", to: "games#player_move"
+  post "/bot_move", to: "games#bot_move"
+  post "/restart", to: "games#restart"
 end

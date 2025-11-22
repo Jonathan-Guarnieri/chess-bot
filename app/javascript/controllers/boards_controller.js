@@ -53,16 +53,39 @@ export default class extends Controller {
   }
 
   _postMove(from, to) {
-    fetch("/moves", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
-        "Accept": "text/vnd.turbo-stream.html"
-      },
-      body: JSON.stringify({ from, to })
-    })
-    .then(r => r.text())
-    .then(html => Turbo.renderStreamMessage(html))
+    const playerMoveRequest = (callback) => {
+      fetch("/player_move", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+          "Accept": "text/vnd.turbo-stream.html"
+        },
+        body: JSON.stringify({ from, to })
+      })
+      .then(r => {
+        if (!r.ok) return null;
+        return r.text();
+      })
+      .then(html => {
+        Turbo.renderStreamMessage(html);
+        callback()
+      })
+    }
+
+    const botMoveRequest = () => {
+      fetch("/bot_move", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+          "Accept": "text/vnd.turbo-stream.html"
+        }
+      })
+      .then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html))
+    }
+
+    playerMoveRequest(botMoveRequest);
   }
 }
