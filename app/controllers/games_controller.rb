@@ -42,6 +42,10 @@ class GamesController < ApplicationController
     @game.move("#{@from}#{@to}")
     session[:game_fen] = @game.board.to_fen
 
+    @second_to_last_move = session[:last_move]
+    @last_move = { from: @from, to: @to }
+    session[:last_move] = @last_move
+
     @piece = @game.board[@to]
     @active_player = @game.active_player
     @sound_name= sound_event

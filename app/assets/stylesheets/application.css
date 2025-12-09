@@ -44,6 +44,10 @@ body {
   background-color: rgba(255, 255, 0, 0.6);
 }
 
+.highlighted-square {
+  filter: hue-rotate(-30deg) saturate(4.2);
+}
+
 .piece {
   position: absolute;
   inset: 0;

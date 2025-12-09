@@ -6,6 +6,13 @@
   <%= render PieceComponent.new(@piece) %>
 <% end %>
 
+<% if @second_to_last_move.present? %>
+  <%= turbo_stream.remove_css_class "#{@second_to_last_move["from"]}", classes: "highlighted-square" %>
+  <%= turbo_stream.remove_css_class "#{@second_to_last_move["to"]}", classes: "highlighted-square" %>
+<% end %>
+<%= turbo_stream.add_css_class "#{@last_move[:from]}", classes: "highlighted-square" %>
+<%= turbo_stream.add_css_class "#{@last_move[:to]}", classes: "highlighted-square" %>
+
 <%= turbo_stream.replace 'active-player' do %>
   <div id="active-player" style="background-color: <%= @active_player %>"></div>
 <% end %>
