@@ -21,6 +21,11 @@ export default class extends Controller {
 
     this._deselect(from)
 
+    if (from === to) {
+      this.from = null
+      return
+    }
+
     if (this._sameColorPieces(from, to)) {
       this._setFrom(to)
       return
