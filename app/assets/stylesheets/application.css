@@ -48,6 +48,41 @@ body {
   filter: hue-rotate(-30deg) saturate(4.2);
 }
 
+.possible-square-to-move {
+  position: relative;
+}
+
+.possible-square-to-capture {
+  position: relative;
+}
+
+.possible-square-to-move::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+}
+
+.possible-square-to-capture::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+  border-radius: 50%;
+  border: 6px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  pointer-events: none;
+}
+
 .piece {
   position: absolute;
   inset: 0;

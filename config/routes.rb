@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   post "/player_move", to: "games#player_move"
   post "/bot_move", to: "games#bot_move"
   post "/restart", to: "games#restart"
+  post "/possible_moves", to: "games#possible_moves"
 end

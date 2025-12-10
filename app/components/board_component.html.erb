@@ -1,4 +1,4 @@
-<div class="board" data-controller="boards">
+<div id="board" class="board" data-controller="boards">
   <% (1..8).to_a.reverse.to_a.each do |row| %>
     <% %w(a b c d e f g h).each_with_index do |col, col_index| %>
       <% square_name = "#{col}#{row}" %>

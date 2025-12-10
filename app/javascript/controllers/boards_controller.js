@@ -35,11 +35,15 @@ export default class extends Controller {
     this._select(from)
   }
 
-  _select(elementId) {
+  async _select(elementId) {
     document.getElementById(elementId).classList.add("selected-square")
+    const possibleMoves = await this._getPossibleMovesFrom(elementId)
+
+    this._highlightPossibleMoves(possibleMoves)
   }
 
   _deselect(elementId) {
+    this._removePossibleMoveHighlights()
     document.getElementById(elementId).classList.remove("selected-square")
   }
 
@@ -87,5 +91,39 @@ export default class extends Controller {
     }
 
     playerMoveRequest(botMoveRequest);
+  }
+
+  async _getPossibleMovesFrom(square) {
+    const r = await fetch("/possible_moves", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({ square })
+    })
+
+    const data = await r.json()
+    return data.possible_moves
+  }
+
+  _highlightPossibleMoves(possibleMoves) {
+    this._removePossibleMoveHighlights()
+    possibleMoves.forEach(square => {
+      const el = document.getElementById(square)
+      const elHasPiece = el.querySelector('img') !== null
+
+      if (elHasPiece) {
+        el.classList.add("possible-square-to-capture")
+      } else {
+        el.classList.add("possible-square-to-move")
+      }
+    });
+  }
+
+  _removePossibleMoveHighlights() {
+    document.getElementById("board").querySelectorAll(".possible-square-to-move").forEach(el => el.classList.remove("possible-square-to-move"));
+    document.getElementById("board").querySelectorAll(".possible-square-to-capture").forEach(el => el.classList.remove("possible-square-to-capture"));
   }
 }

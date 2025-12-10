@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:player_move, :bot_move]
+  before_action :set_game, only: [:player_move, :bot_move, :possible_moves]
 
   def player_move
     @from = params[:from]
@@ -25,6 +25,17 @@ class GamesController < ApplicationController
     session[:game_fen] = @game.board.to_fen
 
     redirect_to root_path
+  end
+
+  def possible_moves
+    possible_moves = @game.board.generate_moves(params[:square])
+    possible_moves.map! do |possible_move|
+      game_dup = Chess::Game.load_fen(session[:game_fen])
+      game_dup.move(possible_move)
+      game_dup.coord_moves.last[-2..]
+    end
+
+    render json: { possible_moves: }
   end
 
   private
