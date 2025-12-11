@@ -8,7 +8,7 @@ export default class extends Controller {
   click(event) {
     const el = event.currentTarget
 
-    // Disable playing as Black. To be removed when adding support for playing as Black.
+    // Disable playing as Black. TODO: To be removed when adding support for playing as Black.
     const isBlackPieceClicked = !!el.querySelector(".black-piece")
     if (isBlackPieceClicked) return
 
