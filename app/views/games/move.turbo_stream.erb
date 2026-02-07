@@ -1,11 +1,12 @@
+<%# MOVE SELECTED PIECE: %>
 <%= turbo_stream.update "#{@from}-piece" do %>
   <%= render PieceComponent.new(nil) %>
 <% end %>
-
 <%= turbo_stream.update "#{@to}-piece" do %>
   <%= render PieceComponent.new(@piece) %>
 <% end %>
 
+<%# HIGHLIGHT LAST MOVE: %>
 <% if @second_to_last_move.present? %>
   <%= turbo_stream.remove_css_class "#{@second_to_last_move["from"]}", classes: "highlighted-square" %>
   <%= turbo_stream.remove_css_class "#{@second_to_last_move["to"]}", classes: "highlighted-square" %>
@@ -13,8 +14,10 @@
 <%= turbo_stream.add_css_class "#{@last_move[:from]}", classes: "highlighted-square" %>
 <%= turbo_stream.add_css_class "#{@last_move[:to]}", classes: "highlighted-square" %>
 
+<%# UPDATE ACTIVE PLAYER COMPONENT: %>
 <%= turbo_stream.replace 'active-player' do %>
   <div id="active-player" style="background-color: <%= @active_player %>"></div>
 <% end %>
 
+<%# PLAY SOUND: %>
 <%= render "sound", sound_name: @sound_name %>
