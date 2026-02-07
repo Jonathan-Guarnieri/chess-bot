@@ -68,8 +68,9 @@ class GamesController < ApplicationController
     :'move-self'
   end
 
-  def calculate_bot_move # TODO: isolate in its own class receiving input as fen
-    raise "No logic implemented"
+  def calculate_bot_move
+    fen = @game.board.to_fen
+    BotMoveCalculator.new(fen).call!
   rescue
     return random_move
   end
