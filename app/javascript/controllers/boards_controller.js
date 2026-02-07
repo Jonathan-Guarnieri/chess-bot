@@ -7,13 +7,14 @@ export default class extends Controller {
 
   click(event) {
     const el = event.currentTarget
+    const isFirstClick = !this.from
 
     // Disable playing as Black. TODO: To be removed when adding support for playing as Black.
     const isBlackPieceClicked = !!el.querySelector(".black-piece")
-    if (isBlackPieceClicked) return
+    if (isBlackPieceClicked && isFirstClick) return
 
     // Handle the first click:
-    if (!this.from) {
+    if (isFirstClick) {
       const isPiece = !!el.querySelector(".piece")
       if (isPiece) this._setFrom(el.id)
       return
