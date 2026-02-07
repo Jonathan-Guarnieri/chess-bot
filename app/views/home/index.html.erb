@@ -1,5 +1,5 @@
 <div id='home'>
-  <%= render BoardComponent.new(@board) %>
+  <%= render partial: 'board', locals: { board: @board } %>
 
   <div id='active-player-component'>
     <p>Player's turn:</p>
