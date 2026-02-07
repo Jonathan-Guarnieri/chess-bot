@@ -28,7 +28,7 @@ class GamesController < ApplicationController
   end
 
   def possible_moves
-    possible_moves = @game.board.generate_moves(params[:square])
+    possible_moves = generate_possible_moves(params[:square])
     possible_moves.map! do |possible_move|
       game_dup = Chess::Game.load_fen(session[:game_fen])
       game_dup.move(possible_move)
@@ -70,13 +70,38 @@ class GamesController < ApplicationController
 
   def calculate_bot_move
     fen = @game.board.to_fen
-    BotMoveCalculator.new(fen).call!
+    from, to = BotMoveCalculator.new(fen).call!
+    raise "Invalid move from bot" unless valid_move?(from, to)
+
+    return from, to
   rescue
     return random_move
   end
 
   def random_move
-    squares = %w(
+    squares.shuffle.each do |from|
+      if generate_possible_moves(from).any?
+        squares.shuffle.each do |to| 
+          return from, to if valid_move?(from, to)
+        end
+      end
+    end
+
+    raise "Unable to find a bot move"
+  end
+
+  def valid_move?(from, to)
+    move = "#{from}#{to}"
+    test_game = Chess::Game.load_fen(@game.board.to_fen)
+    !!test_game.move(move) rescue false
+  end
+
+  def generate_possible_moves(from)
+    @game.board.generate_moves(from)
+  end
+
+  def squares
+    %w(
       a1 a2 a3 a4 a5 a6 a7 a8
       b1 b2 b3 b4 b5 b6 b7 b8
       c1 c2 c3 c4 c5 c6 c7 c8
@@ -86,19 +111,5 @@ class GamesController < ApplicationController
       g1 g2 g3 g4 g5 g6 g7 g8
       h1 h2 h3 h4 h5 h6 h7 h8
     )
-
-    squares.shuffle.each do |from|
-      possible_moves = @game.board.generate_moves(from)
-      next unless possible_moves.any?
-
-      squares.shuffle.each do |to| 
-        move = "#{from}#{to}"
-        test_game = Chess::Game.load_fen(@game.board.to_fen)
-        test_game.move(move) rescue next
-        return from, to
-      end
-    end
-
-    raise "Unable to find a bot move"
   end
 end
