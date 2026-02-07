@@ -13,7 +13,7 @@ class GamesController < ApplicationController
   end
 
   def bot_move
-    @from, @to = calculate_bot_move#(fen) # TODO: input as fen
+    @from, @to = calculate_bot_move
 
     do_move
 
@@ -68,7 +68,13 @@ class GamesController < ApplicationController
     :'move-self'
   end
 
-  def calculate_bot_move # TODO: isolate in its own class
+  def calculate_bot_move # TODO: isolate in its own class receiving input as fen
+    raise "No logic implemented"
+  rescue
+    return random_move
+  end
+
+  def random_move
     squares = %w(
       a1 a2 a3 a4 a5 a6 a7 a8
       b1 b2 b3 b4 b5 b6 b7 b8
