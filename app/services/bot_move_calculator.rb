@@ -13,10 +13,10 @@ class BotMoveCalculator
   private
 
   def calculate_move
-    play_castling_plan
+    next_move_to_castle
   end
 
-  def play_castling_plan
+  def next_move_to_castle
     if active_player == :black
       return "e7", "e6" unless piece_on("e6")
       return "f8", "e7" unless piece_on("e7")
