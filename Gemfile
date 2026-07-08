@@ -41,7 +41,7 @@ gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
 # A framework for building reusable, testable & encapsulated view components in Ruby on Rails.
-gem 'view_component', '~> 4.1', '>= 4.1.1'
+gem 'view_component', '~> 4.2'
 
 # A fast chess library that use bitboards to play chess with Ruby
 gem 'chess', '~> 0.4.0'
